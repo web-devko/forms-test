@@ -1,0 +1,109 @@
+<form (ngSubmit)="login()" #form="ngForm">
+  <input
+  type="text"
+  [(ngModel)]="model.email"
+  name="email"
+  required
+  [email]="true"
+  minlength="14"
+  maxlength="38"
+  #email="ngModel"
+  />
+  <ng-container *ngIf="email.invalid && email.touched">
+    <p *ngIf="email.errors?.minlength">
+      Za mało znaków
+    </p>
+    <p *ngIf="email.errors?.required">
+      Uzupełnij znaki
+    </p>
+    <p *ngIf="email.errors?.email">
+      To nie jest mail!
+    </p>
+  </ng-container>
+
+  <input
+  type="password"
+  [(ngModel)]="model.passwd"
+  name="passwd"
+  minlength="5"
+  maxlength="12"
+  required
+  #passwd="ngModel"
+  />
+  <ng-container *ngIf="passwd.invalid && passwd.touched">
+    <p *ngIf="passwd.errors?.minlength">
+      Za mało znaków
+    </p>
+    <p *ngIf="passwd.errors?.required">
+      Uzupełnij znaki
+    </p>
+  </ng-container>
+  <button type="submit" [disabled]="form.invalid">Zaloguj</button>
+</form>
+
+
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+
+<label>
+  *Username:
+  <input type="text" formControlName="username">
+</label>
+<span
+  *ngIf="(registerFormControl.username.touched || submitted) && registerFormControl.username.errors?.required">
+  Password is required
+</span>
+<span class="text-danger"
+  *ngIf="registerFormControl.username.touched && registerFormControl.username.errors?.maxlength">
+  Max length is 15
+</span>
+
+<span class="text-danger"
+  *ngIf="registerFormControl.username.touched && registerFormControl.username.errors?.minlength">
+  Min lenght is 5
+</span>
+
+<label>
+  *Password:
+  <input type="password" formControlName="password">
+</label>
+<span
+  *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required">
+  Password is required
+</span>
+
+
+<label>
+  *Confirm password:
+  <input type="password" formControlName="confirmPassword">
+</label>
+
+<label>
+  *Email:
+  <input type="text" formControlName="email">
+</label>
+<span class="text-danger"
+  *ngIf="(registerFormControl.email.touched || submitted) && registerFormControl.email.errors?.required">
+  Email is required
+</span>
+<span class="text-danger"
+  *ngIf="registerFormControl.email.touched && registerFormControl.email.errors?.email">
+  Enter a valid email address
+</span>
+
+<button>Rejestracja</button>
+
+</form>
+
+
+<app-form-array></app-form-array>
+
+
+
+
+
+
+
+
+
+
+

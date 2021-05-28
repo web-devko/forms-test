@@ -1,0 +1,17 @@
+<div [formGroup]="form">
+  <ng-container formArrayName="todos">
+    <ng-container *ngFor="let usersForm of users.controls; let i = index">
+        <div [formGroup]="usersForm">
+          <label>Username</label>
+          <input type="text" formControlName="username">
+          <label>First name</label>
+          <input type="text" formControlName="firstName">
+          <button (click)="delete(i)">Delete</button>
+        </div>
+    </ng-container>
+  </ng-container>
+  <label>Dodaj innch użytkowników</label>
+  <button (click)="addUser()">
+    Add
+  </button>
+</div>
